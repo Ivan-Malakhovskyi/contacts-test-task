@@ -1,19 +1,20 @@
 import { createGlobalStyle } from "styled-components";
 
-
- export const theme = {
-     colors: {
-     MainBackgroundColor: '#ffffff',
-       addBgColor: '#EDEDED',
-    MainColorInput: '#AAAAAA'
-    }
-}
+export const theme = {
+  colors: {
+    MainBlack: "#000000",
+    MainBackgroundColor: "#ffffff",
+    accentBgColor: "#A6A6A6",
+    addBgColor: "#EDEDED",
+    MainColorInput: "#AAAAAA",
+  },
+};
 
 export const GlobalStyle = createGlobalStyle`
 
 
 body {
-  background-color: ${({theme: {colors}}) => colors.MainBackgroundColor};
+  background-color: ${({ theme: { colors } }) => colors.MainBackgroundColor};
   font-family: "Poppins", sans-serif;
   font-size: 16px;
     font-weight: 400;
@@ -49,4 +50,4 @@ button {
   background-color: transparent;
 }
 
-`
+`;
