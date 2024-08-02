@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+env: VITE_API_TOKEN: VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn
 
 jobs:
   build:
