@@ -39,18 +39,24 @@ export const ContactInfoWrapper = styled.div`
 `;
 
 export const ContactCredentials = styled.span`
-  color: ${({ theme: { colors } }) => colors.mainBlack};
+  color: ${({ theme: { colors } }) => colors.MainBlack};
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
 `;
 
 export const ContactCredentialsSeparator = styled.span`
-  color: ${({ theme: { colors } }) => colors.mainBlack};
+  color: ${({ theme: { colors } }) => colors.MainBlack};
   margin-right: 6px;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
+`;
+
+export const Topic = styled.h3`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
 `;
 
 export const TagList = styled.ul`
@@ -62,8 +68,6 @@ export const TagList = styled.ul`
 
 export const TagListItem = styled.li`
   display: flex;
-  width: 30px;
-  height: 20px;
   padding: 0 12px;
   border-radius: 4px;
   background-color: ${({ theme: { colors } }) => colors.accentBgColor};
@@ -71,7 +75,22 @@ export const TagListItem = styled.li`
 
 export const TagListItemName = styled.span`
   color: ${({ theme: { colors } }) => colors.MainBlack};
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
+`;
+
+export const ContactDetailsStyled = styled.div`
+  padding-top: 32px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  /* flex-direction: column; */
+  /* max-width: 431px; */
+  /* max-height: 341px; */
+`;
+
+export const AvatarWrapper = styled.div`
+  margin-right: 15px;
 `;

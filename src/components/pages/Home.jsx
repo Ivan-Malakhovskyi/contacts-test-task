@@ -4,17 +4,16 @@ import { ContactsList } from "../PhoneBook/ContactsList/ContactsList";
 
 export const Home = () => {
   return (
-    <>
-      <MainPageList>
-        <li>
-          {" "}
-          <ContactsForm />
-        </li>
-        <li>
-          {" "}
-          <ContactsList />
-        </li>
-      </MainPageList>
-    </>
+    <MainPageList>
+      {" "}
+      <li>
+        {" "}
+        <ContactsForm />
+      </li>
+      <li>
+        {" "}
+        <ContactsList />
+      </li>
+    </MainPageList>
   );
 };

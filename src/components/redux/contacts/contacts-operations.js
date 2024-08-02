@@ -1,31 +1,94 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// axios.defaults.baseURL = 'https://live.devnimble.com/api/v1'
+axios.defaults.baseURL =
+  "https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1";
 
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
-  unset() {},
+  unset() {
+    axios.defaults.headers.common.Authorization = "";
+  },
 };
+
+const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export const getContactsList = createAsyncThunk(
   "contacts/getContactsList",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        "https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1/contacts",
-        token.set("VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn"),
+      const { data } = await axios.get("/contacts", token.set(API_TOKEN), {
+        headers: {
+          "X-Requested-With": "XML",
+          "X-Nimble-Token": API_TOKEN,
+        },
+      });
+      return data.resources;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getContactById = createAsyncThunk(
+  "contacts/getContactById",
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await axios.get(`/contact/${id}`, token.set(API_TOKEN), {
+        headers: {
+          "X-Requested-With": "XML",
+          "X-Nimble-Token": API_TOKEN,
+        },
+      });
+
+      return data.resources;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createContact = createAsyncThunk(
+  "contacts/createContact",
+  async (userData, thunkAPI) => {
+    try {
+      const { data } = await axios.post(
+        `/contact`,
+        userData,
+        token.set(API_TOKEN),
         {
           headers: {
             "X-Requested-With": "XML",
-            "X-Nimble-Token": "VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn",
+            "X-Nimble-Token": API_TOKEN,
           },
         }
       );
-      token.set(data.token);
-      return data.resources;
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteContactById = createAsyncThunk(
+  "contacts/deleteContact",
+  async (contactId, thunkAPI) => {
+    try {
+      const { data } = await axios.delete(
+        `/contact/${contactId}`,
+        token.set(API_TOKEN),
+        {
+          headers: {
+            "X-Requested-With": "XML",
+            "X-Nimble-Token": API_TOKEN,
+          },
+        }
+      );
+
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

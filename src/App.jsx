@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Container } from "./components/layout/Layout.styled";
 import { GlobalStyle } from "./GlobalStyle";
 import { Home } from "./components/pages/Home";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getContactsList } from "./components/redux/contacts/contacts-operations";
 import { ContactDetails } from "./components/pages/ContactDetails";
+import { Layout } from "./components/layout/Layout";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,13 +17,14 @@ const App = () => {
 
   return (
     <>
-      <Container>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contacts/1" element={<ContactDetails />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/contacts/:id" element={<ContactDetails />} />
           <Route path="*" element={<p>Not found</p>} />
-        </Routes>
-      </Container>
+        </Route>
+      </Routes>
+
       <GlobalStyle />
     </>
   );

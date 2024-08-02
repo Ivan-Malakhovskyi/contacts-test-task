@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getContactsList } from "./contacts-operations";
+import {
+  createContact,
+  deleteContactById,
+  getContactById,
+  getContactsList,
+} from "./contacts-operations";
 
 const handelPending = (state) => {
   state.isLoading = true;
@@ -14,7 +19,7 @@ const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
     items: [],
-
+    contactInfo: [],
     isLoading: false,
     isError: null,
   },
@@ -36,6 +41,29 @@ const contactsSlice = createSlice({
     });
     builder.addCase(getContactsList.pending, handelPending);
     builder.addCase(getContactsList.rejected, handleRejected);
+    builder.addCase(getContactById.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = null;
+      state.contactInfo = action.payload;
+    });
+    builder.addCase(getContactById.pending, handelPending),
+      builder.addCase(getContactById.rejected, handleRejected);
+    builder.addCase(createContact.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = null;
+      state.items.push(action.payload);
+    });
+    builder.addCase(createContact.pending, handelPending),
+      builder.addCase(createContact.rejected, handleRejected);
+    builder.addCase(deleteContactById.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = null;
+      state.items = state.items.filter(
+        (item) => item.id !== action.payload.ids[0]
+      );
+    });
+    builder.addCase(deleteContactById.pending, handelPending);
+    builder.addCase(deleteContactById.rejected, handleRejected);
   },
 });
 

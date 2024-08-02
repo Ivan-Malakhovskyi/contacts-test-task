@@ -15,4 +15,7 @@ export const ContactsListStyled = styled.ul`
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+  flex-grow: 1;
+
+  overflow-y: auto;
 `;

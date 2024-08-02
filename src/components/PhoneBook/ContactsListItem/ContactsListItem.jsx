@@ -13,80 +13,84 @@ import {
 } from "./ContactsListItem.styled";
 import { ContactInfoWrapper } from "./ContactsListItem.styled";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectContacts } from "../../redux/contacts/contacts-selectors";
-import { Spinner } from "../../Global/Spiner/Spinner";
+
+import { deleteContactById } from "../../redux/contacts/contacts-operations";
 
 export const ContactsListItem = () => {
   const contacts = useSelector(selectContacts);
-  console.log("contacts FIELDS", contacts && contacts);
+
+  const dispatch = useDispatch();
+
+  const handleDelete = (contactId) => {
+    dispatch(deleteContactById(contactId));
+  };
 
   return (
     <>
-      {contacts.length !== 0 ? (
+      {contacts && contacts.length !== 0 ? (
         contacts.map(({ id, avatar_url, fields, tags }) => (
-          <>
-            <ListItemWrapper key={id}>
-              <Link to="contacts/1">
-                <ContactInfoWrapper>
-                  {" "}
-                  <UserAvatar
-                    src={avatar_url || userLogo}
-                    width={54}
-                    height={54}
-                  />
-                  <ul>
-                    <li>
-                      {" "}
+          <ListItemWrapper key={id}>
+            <Link to={`contacts/${id}`}>
+              <ContactInfoWrapper>
+                {" "}
+                <UserAvatar
+                  src={avatar_url || userLogo}
+                  width={54}
+                  height={54}
+                />
+                <ul>
+                  <li>
+                    {" "}
+                    <ContactCredentials>
+                      <ContactCredentialsSeparator>
+                        {fields["first name"] && fields["first name"][0].value}
+                      </ContactCredentialsSeparator>
                       <ContactCredentials>
-                        <ContactCredentialsSeparator>
-                          {fields && fields["first name"][0].value}
-                        </ContactCredentialsSeparator>
-                        <ContactCredentials>
-                          {" "}
-                          {fields && fields["last name"][0].value}
-                        </ContactCredentials>
+                        {" "}
+                        {fields["last name"] && fields["last name"][0].value}
                       </ContactCredentials>
-                    </li>
-                    <li>
-                      <ContactCredentials>
-                        {fields.email && fields.email[0].value}
-                      </ContactCredentials>
-                    </li>
+                    </ContactCredentials>
+                  </li>
+                  <li>
+                    <ContactCredentials>
+                      {fields.email && fields.email[0].value}
+                    </ContactCredentials>
+                  </li>
 
-                    <TagList>
-                      {/* {tags.length !== 0 &&
+                  <TagList>
+                    {/* {tags.length !== 0 &&
                         tags.map((item, idx) => (
                           <li key={idx}>{item || "TAg 1"}</li>
                         ))} */}
-                      <TagListItem>
-                        <TagListItemName>tag 1</TagListItemName>
-                      </TagListItem>
-                      <TagListItem>
-                        <TagListItemName>tag 1</TagListItemName>
-                      </TagListItem>
-                      <TagListItem>
-                        <TagListItemName>tag 1</TagListItemName>
-                      </TagListItem>
-                      <TagListItem>
-                        <TagListItemName>tag 1</TagListItemName>
-                      </TagListItem>
-                      <TagListItem>
-                        <TagListItemName>tag 1</TagListItemName>
-                      </TagListItem>
-                    </TagList>
-                  </ul>
-                </ContactInfoWrapper>
-              </Link>
+                    <TagListItem>
+                      <TagListItemName>tag 1</TagListItemName>
+                    </TagListItem>
+                    <TagListItem>
+                      <TagListItemName>tag 1</TagListItemName>
+                    </TagListItem>
+                    <TagListItem>
+                      <TagListItemName>tag 1</TagListItemName>
+                    </TagListItem>
+                    <TagListItem>
+                      <TagListItemName>tag 1</TagListItemName>
+                    </TagListItem>
+                    <TagListItem>
+                      <TagListItemName>tag 1</TagListItemName>
+                    </TagListItem>
+                  </TagList>
+                </ul>
+              </ContactInfoWrapper>
+            </Link>
 
-              <ButtonClose type="button">
-                <IconClose src={iconClose} width={24} height={24} />
-              </ButtonClose>
-            </ListItemWrapper>
-          </>
+            <ButtonClose type="button" onClick={() => handleDelete(id)}>
+              <IconClose src={iconClose} width={24} height={24} />
+            </ButtonClose>
+          </ListItemWrapper>
         ))
       ) : (
-        <Spinner />
+        <div>Empty</div>
       )}
     </>
   );
