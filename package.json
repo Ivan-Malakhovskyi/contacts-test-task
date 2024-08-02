@@ -2,6 +2,7 @@
   "name": "contacts-test-task",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://ivan-malakhovskyi.github.io/contacts-test-task/",
   "type": "module",
   "scripts": {
     "dev": "vite",
