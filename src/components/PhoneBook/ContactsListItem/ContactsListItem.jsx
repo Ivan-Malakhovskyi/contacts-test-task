@@ -27,7 +27,7 @@ export const ContactsListItem = () => {
         contacts.map(({ id, avatar_url, fields, tags }) => (
           <>
             <ListItemWrapper key={id}>
-              <Link to="/contacts/1">
+              <Link to="contacts/1">
                 <ContactInfoWrapper>
                   {" "}
                   <UserAvatar

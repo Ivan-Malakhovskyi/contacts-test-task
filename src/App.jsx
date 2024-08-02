@@ -6,6 +6,7 @@ import { Home } from "./components/pages/Home";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getContactsList } from "./components/redux/contacts/contacts-operations";
+import { ContactDetails } from "./components/pages/ContactDetails";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const App = () => {
       <Container>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contact/1" element={<div>Contact1</div>} />
+          <Route path="/contacts/1" element={<ContactDetails />} />
           <Route path="*" element={<p>Not found</p>} />
         </Routes>
       </Container>
