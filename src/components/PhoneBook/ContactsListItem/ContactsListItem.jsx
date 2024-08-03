@@ -1,5 +1,6 @@
-import userLogo from "/icons/user_icon.svg";
-import iconClose from "/icons/icon_close.svg";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   ButtonClose,
   ContactCredentials,
@@ -12,12 +13,12 @@ import {
   UserAvatar,
 } from "./ContactsListItem.styled";
 import { ContactInfoWrapper } from "./ContactsListItem.styled";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { selectContacts } from "../../redux/contacts/contacts-selectors";
-
 import { deleteContactById } from "../../redux/contacts/contacts-operations";
+
 import { toast } from "react-toastify";
+import userLogo from "/icons/user_icon.svg";
+import iconClose from "/icons/icon_close.svg";
 
 export const ContactsListItem = () => {
   const contacts = useSelector(selectContacts);

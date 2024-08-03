@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import {
   addTagToContact,
   getContactById,
@@ -10,7 +12,6 @@ import {
   selectError,
   selectLoading,
 } from "../redux/contacts/contacts-selectors";
-import { Spinner } from "../Global/Spiner/Spinner";
 import {
   AvatarWrapper,
   ContactDetailsStyled,
@@ -21,16 +22,18 @@ import {
   TagListItem,
   ContactDetailsContainer,
 } from "../PhoneBook/ContactsListItem/ContactsListItem.styled";
-import { useForm } from "react-hook-form";
 import {
   Button,
   Form,
   FormSection,
   Input,
 } from "../PhoneBook/ContactsForm/ContactsForm.styled";
+
+import { transformSimpleField } from "../utils";
+
+import { Spinner } from "../Global/Spiner/Spinner";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { transformSimpleField } from "../utils";
 
 export const ContactDetails = () => {
   const dispatch = useDispatch();

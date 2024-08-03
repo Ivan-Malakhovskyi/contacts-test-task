@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import {
   Button,
@@ -14,13 +13,15 @@ import {
 } from "./ContactsForm.styled";
 
 import { createContactSchema } from "../../schemas";
-import { useDispatch, useSelector } from "react-redux";
 import { createContact } from "../../redux/contacts/contacts-operations";
 import { transformField } from "../../utils";
 import {
   selectContacts,
   selectLoading,
 } from "../../redux/contacts/contacts-selectors";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const defaultValues = {
   "first name": "",
