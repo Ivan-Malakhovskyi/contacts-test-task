@@ -43,6 +43,13 @@ export const Input = styled.input`
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+
+  &::placeholder {
+    color: ${({ theme: { colors } }) => colors.MainColorInput};
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+  }
 `;
 
 export const Button = styled.button`

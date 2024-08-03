@@ -29,10 +29,10 @@ const defaultValues = {
 };
 
 export const ContactsForm = () => {
-  const dispatch = useDispatch();
-
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectLoading);
+
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -50,13 +50,16 @@ export const ContactsForm = () => {
       return;
     }
 
-    const isContactExist = contacts.filter(
-      (contact) =>
-        contact.fields["first name"][0].value.toLowerCase() ===
-        data["first name"]
-    );
+    const isContactExist =
+      contacts &&
+      contacts.some(
+        (contact) =>
+          contact.fields["first name"] &&
+          contact.fields["first name"][0].value.toLowerCase() ===
+            data["first name"].toLowerCase()
+      );
 
-    if (isContactExist.length !== 0) {
+    if (isContactExist) {
       toast.error("Such contact is exist");
       return;
     }

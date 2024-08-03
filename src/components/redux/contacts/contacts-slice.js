@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addTagToContact,
   createContact,
   deleteContactById,
   getContactById,
@@ -20,6 +21,7 @@ const contactsSlice = createSlice({
   initialState: {
     items: [],
     contactInfo: [],
+    tags: [],
     isLoading: false,
     isError: null,
   },
@@ -56,14 +58,21 @@ const contactsSlice = createSlice({
     builder.addCase(createContact.pending, handelPending),
       builder.addCase(createContact.rejected, handleRejected);
     builder.addCase(deleteContactById.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.isError = null;
-      state.items = state.items.filter(
-        (item) => item.id !== action.payload.ids[0]
-      );
+      state.isLoading = false;
+      state.items = state.items.filter((item) => {
+        return item.id !== action.payload.ids[0];
+      });
     });
     builder.addCase(deleteContactById.pending, handelPending);
     builder.addCase(deleteContactById.rejected, handleRejected);
+    builder.addCase(addTagToContact.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = null;
+      state.tags = [...state.tags, action.payload.tags];
+    });
+    builder.addCase(addTagToContact.pending, handelPending);
+    builder.addCase(addTagToContact.rejected, handleRejected);
   },
 });
 

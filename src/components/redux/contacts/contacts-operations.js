@@ -19,13 +19,22 @@ export const getContactsList = createAsyncThunk(
   "contacts/getContactsList",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get("/contacts", token.set(API_TOKEN), {
-        headers: {
-          "X-Requested-With": "XML",
-          "X-Nimble-Token": API_TOKEN,
-        },
-      });
-      return data.resources;
+      const resp = await axios.get(
+        "/contacts?sort=created:desc",
+        token.set(API_TOKEN),
+        {
+          headers: {
+            "X-Requested-With": "XML",
+            "X-Nimble-Token": API_TOKEN,
+          },
+        }
+      );
+
+      if (resp.status !== 200) {
+        throw new Error("Error");
+      }
+
+      return resp.data.resources;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -36,14 +45,18 @@ export const getContactById = createAsyncThunk(
   "contacts/getContactById",
   async (id, thunkAPI) => {
     try {
-      const { data } = await axios.get(`/contact/${id}`, token.set(API_TOKEN), {
+      const resp = await axios.get(`/contact/${id}`, token.set(API_TOKEN), {
         headers: {
           "X-Requested-With": "XML",
           "X-Nimble-Token": API_TOKEN,
         },
       });
 
-      return data.resources;
+      if (resp.status !== 200) {
+        throw new Error("Error");
+      }
+
+      return resp.data.resources;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -54,7 +67,7 @@ export const createContact = createAsyncThunk(
   "contacts/createContact",
   async (userData, thunkAPI) => {
     try {
-      const { data } = await axios.post(
+      const resp = await axios.post(
         `/contact`,
         userData,
         token.set(API_TOKEN),
@@ -66,7 +79,11 @@ export const createContact = createAsyncThunk(
         }
       );
 
-      return data;
+      if (resp.status !== 201) {
+        throw new Error("Error");
+      }
+
+      return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -77,7 +94,7 @@ export const deleteContactById = createAsyncThunk(
   "contacts/deleteContact",
   async (contactId, thunkAPI) => {
     try {
-      const { data } = await axios.delete(
+      const resp = await axios.delete(
         `/contact/${contactId}`,
         token.set(API_TOKEN),
         {
@@ -88,7 +105,40 @@ export const deleteContactById = createAsyncThunk(
         }
       );
 
-      return data.data;
+      if (resp.status !== 200) {
+        throw new Error("Error");
+      }
+
+      return resp.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addTagToContact = createAsyncThunk(
+  "contacts/addTagToContact",
+  async (userData, thunkAPI) => {
+    try {
+      const { tags, id } = userData;
+
+      const resp = await axios.put(
+        `/contacts/${id}/tags`,
+        tags,
+        token.set(API_TOKEN),
+        {
+          headers: {
+            "X-Requested-With": "XML",
+            "X-Nimble-Token": API_TOKEN,
+          },
+        }
+      );
+
+      if (resp.status !== 200) {
+        throw new Error("Error");
+      }
+
+      return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

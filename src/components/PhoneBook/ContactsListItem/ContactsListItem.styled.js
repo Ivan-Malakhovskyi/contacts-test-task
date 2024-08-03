@@ -62,8 +62,20 @@ export const Topic = styled.h3`
 export const TagList = styled.ul`
   display: flex;
   margin-top: 17px;
+  margin-bottom: 36px;
   gap: 8px;
   flex-wrap: wrap;
+
+  @media screen and (min-width: 768px) {
+    max-width: 426px;
+  }
+`;
+
+export const Tag = styled.span`
+  color: ${({ theme: { colors } }) => colors.MainBlack};
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
 `;
 
 export const TagListItem = styled.li`
@@ -71,6 +83,12 @@ export const TagListItem = styled.li`
   padding: 0 12px;
   border-radius: 4px;
   background-color: ${({ theme: { colors } }) => colors.accentBgColor};
+
+  @media screen and (max-width: 767px) {
+    width: 54px;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const TagListItemName = styled.span`
@@ -84,11 +102,13 @@ export const ContactDetailsStyled = styled.div`
   padding-top: 32px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
-  /* align-items: center; */
-  /* flex-direction: column; */
-  /* max-width: 431px; */
-  /* max-height: 341px; */
+  margin-bottom: 26px;
+`;
+
+export const ContactDetailsContainer = styled.div`
+  display: table;
+  margin: 0 auto;
+  width: 431px;
 `;
 
 export const AvatarWrapper = styled.div`

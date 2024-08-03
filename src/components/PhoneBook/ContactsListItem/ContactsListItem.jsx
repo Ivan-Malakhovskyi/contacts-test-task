@@ -6,9 +6,9 @@ import {
   ContactCredentialsSeparator,
   IconClose,
   ListItemWrapper,
+  Tag,
   TagList,
   TagListItem,
-  TagListItemName,
   UserAvatar,
 } from "./ContactsListItem.styled";
 import { ContactInfoWrapper } from "./ContactsListItem.styled";
@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectContacts } from "../../redux/contacts/contacts-selectors";
 
 import { deleteContactById } from "../../redux/contacts/contacts-operations";
+import { toast } from "react-toastify";
 
 export const ContactsListItem = () => {
   const contacts = useSelector(selectContacts);
@@ -25,6 +26,7 @@ export const ContactsListItem = () => {
 
   const handleDelete = (contactId) => {
     dispatch(deleteContactById(contactId));
+    toast.success("Contact was successfully deleted");
   };
 
   return (
@@ -32,7 +34,7 @@ export const ContactsListItem = () => {
       {contacts && contacts.length !== 0 ? (
         contacts.map(({ id, avatar_url, fields, tags }) => (
           <ListItemWrapper key={id}>
-            <Link to={`contacts/${id}`}>
+            <Link to={`/contact/${id}`}>
               <ContactInfoWrapper>
                 {" "}
                 <UserAvatar
@@ -60,25 +62,12 @@ export const ContactsListItem = () => {
                   </li>
 
                   <TagList>
-                    {/* {tags.length !== 0 &&
-                        tags.map((item, idx) => (
-                          <li key={idx}>{item || "TAg 1"}</li>
-                        ))} */}
-                    <TagListItem>
-                      <TagListItemName>tag 1</TagListItemName>
-                    </TagListItem>
-                    <TagListItem>
-                      <TagListItemName>tag 1</TagListItemName>
-                    </TagListItem>
-                    <TagListItem>
-                      <TagListItemName>tag 1</TagListItemName>
-                    </TagListItem>
-                    <TagListItem>
-                      <TagListItemName>tag 1</TagListItemName>
-                    </TagListItem>
-                    <TagListItem>
-                      <TagListItemName>tag 1</TagListItemName>
-                    </TagListItem>
+                    {tags.length !== 0 &&
+                      tags.map((item) => (
+                        <TagListItem key={item.id}>
+                          <Tag>{item.tag}</Tag>
+                        </TagListItem>
+                      ))}
                   </TagList>
                 </ul>
               </ContactInfoWrapper>

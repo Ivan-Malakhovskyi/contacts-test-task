@@ -8,3 +8,7 @@ export const transformField = (label, value) => ({
     },
   ],
 });
+
+export const transformSimpleField = (label, values) => ({
+  [label]: values.map((value) => value),
+});
