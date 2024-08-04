@@ -1,11 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin: 0 auto;
-  height: 100vh;
-  max-width: 1250px;
-  padding: 0 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 15px;
+  display: flex;
+
   min-width: 370px;
+  max-width: 100%;
+
+  @media screen and (min-width: 768px) {
+    height: 100vh;
+    max-width: 1250px;
+  }
 `;
 
 export const FallBack = styled.div`

@@ -9,6 +9,11 @@ export const ListItemWrapper = styled.li`
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+
+  @media screen and (min-width: 768px) {
+    width: 100%;
+    max-width: 558px;
+  }
 `;
 
 export const UserAvatar = styled.img`
@@ -33,9 +38,9 @@ export const ContactInfoWrapper = styled.div`
   width: 100%;
   gap: 14px;
 
-  @media screen and (min-width: 768px) {
-    min-width: 558px;
-  }
+  /* @media screen and (min-width: 1128px) {
+    max-width: 558px;
+  } */
 `;
 
 export const ContactCredentials = styled.span`
