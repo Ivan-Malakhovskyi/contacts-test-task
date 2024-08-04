@@ -1,19 +1,23 @@
 import { ContactsForm } from "../PhoneBook/ContactsForm/ContactsForm";
-import { MainPageList } from "../Global/MainPageList.styled";
+import {
+  MainPageFormWrapper,
+  MainPageList,
+  MainPageListItem,
+} from "../Global/MainPageList.styled";
 import { ContactsList } from "../PhoneBook/ContactsList/ContactsList";
 
 export const Home = () => {
   return (
     <MainPageList>
       {" "}
-      <li>
+      <MainPageFormWrapper>
         {" "}
         <ContactsForm />
-      </li>
-      <li>
+      </MainPageFormWrapper>
+      <MainPageListItem>
         {" "}
         <ContactsList />
-      </li>
+      </MainPageListItem>
     </MainPageList>
   );
 };

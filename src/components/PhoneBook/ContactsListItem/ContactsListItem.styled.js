@@ -10,9 +10,9 @@ export const ListItemWrapper = styled.li`
     margin-bottom: 10px;
   }
 
-  @media screen and (min-width: 768px) {
-    width: 100%;
-    max-width: 558px;
+  @media screen and (min-width: 1120px) {
+    max-width: 100%;
+    width: 558px;
   }
 `;
 

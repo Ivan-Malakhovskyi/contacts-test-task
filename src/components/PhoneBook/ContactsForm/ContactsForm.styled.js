@@ -13,9 +13,9 @@ export const FormSection = styled.section`
   @media screen and (min-width: 768px) {
     padding-top: 0;
     padding-bottom: 0;
-    position: sticky;
-    top: 0%;
-    z-index: 1000;
+    /* position: sticky;
+    top: 0;
+    z-index: 1000; */
   }
 `;
 

@@ -12,7 +12,7 @@ export const Spinner = () => {
         color="#4fa94d"
         radius="9"
         ariaLabel="three-dots-loading"
-        wrapperStyle={{ display: "flex", justifyContent: "center" }}
+        wrapperStyle={{}}
         wrapperClass=""
       />
     </SpinnerWrapper>
