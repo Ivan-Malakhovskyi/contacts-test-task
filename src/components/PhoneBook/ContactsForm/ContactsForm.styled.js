@@ -53,6 +53,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
+  color: ${({ theme: { colors } }) => colors.MainBlack};
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
