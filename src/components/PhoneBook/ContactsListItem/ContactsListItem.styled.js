@@ -109,6 +109,7 @@ export const ContactDetailsContainer = styled.div`
   display: table;
   margin: 0 auto;
   width: 431px;
+  max-width: 100%;
 `;
 
 export const AvatarWrapper = styled.div`

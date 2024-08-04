@@ -83,6 +83,12 @@ export const ContactsForm = () => {
       owner_id: null,
     };
 
+    Object.keys(updatedObj.fields).forEach(
+      (key) =>
+        updatedObj.fields[key][0].value.length === 0 &&
+        delete updatedObj.fields[key]
+    );
+
     dispatch(createContact(updatedObj));
     toast.success("Contact successfully created");
     reset();
@@ -96,12 +102,16 @@ export const ContactsForm = () => {
 
         <Input {...register("first name")} />
 
-        {errors["first name"] && <ErrorMsg>This field is required</ErrorMsg>}
+        {errors["first name"] && (
+          <ErrorMsg>{errors["first name"].message}</ErrorMsg>
+        )}
 
         <Label htmlFor="last name">Last name</Label>
         <Input {...register("last name")} />
 
-        {errors["last name"] && <ErrorMsg>This field is required</ErrorMsg>}
+        {errors["last name"] && (
+          <ErrorMsg>{errors["last name"].message}</ErrorMsg>
+        )}
 
         <Label htmlFor="email">Email</Label>
         <Input {...register("email")} />

@@ -8,18 +8,16 @@ export const createContactSchema = yup
   .shape({
     "first name": yup
       .string()
-      .matches(nameRegex, "Name should not contain numbers")
-      .required("Required"),
+      .matches(nameRegex, "Name should not contain numbers"),
     "last name": yup
       .string()
-      .matches(nameRegex, "Name should not contain numbers")
-      .required("Required"),
+      .matches(nameRegex, "Name should not contain numbers"),
     email: yup.string().matches(emailRegex, "Invalid email format").required(),
   })
   .test(
     "at-least-one-name",
     "Either first name or last name is required",
-    (value) => {
-      return value["first name"] || value["last name"];
+    function (values) {
+      return values["first name"] || values["last name"];
     }
   );

@@ -1,20 +1,18 @@
-import { Puff } from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 import { SpinnerWrapper } from "./Spinner.styled";
 
 export const Spinner = () => {
   return (
     <SpinnerWrapper>
-      <Puff
+      <ThreeDots
+        ThreeDots
         visible={true}
         height="80"
         width="80"
-        color="#2a1b6d"
-        ariaLabel="puff-loading"
-        wrapperStyle={{
-          display: "flex",
-          justifyContent: "center",
-          alignItem: "center",
-        }}
+        color="#4fa94d"
+        radius="9"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{ display: "flex", justifyContent: "center" }}
         wrapperClass=""
       />
     </SpinnerWrapper>

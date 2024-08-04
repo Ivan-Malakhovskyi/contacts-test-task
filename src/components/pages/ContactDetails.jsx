@@ -78,57 +78,50 @@ export const ContactDetails = () => {
   return (
     <>
       {contactInfo && contactInfo.length !== 0 && (
-        <>
-          {" "}
-          <section>
-            <ContactDetailsContainer>
+        <section>
+          <ContactDetailsContainer>
+            {" "}
+            <ContactDetailsStyled>
               {" "}
-              <ContactDetailsStyled>
-                {" "}
-                <AvatarWrapper>
-                  <UserAvatar
-                    src={item.avatar_url}
-                    width="54px"
-                    height="54px"
-                  />
-                </AvatarWrapper>
-                <ul>
-                  <li>
-                    <TagListItemName>
-                      {item.fields && item.fields["first name"][0].value}
-                    </TagListItemName>
-                    <TagListItemName>
-                      {isLastNameExist && item.fields["last name"][0]?.value}
-                    </TagListItemName>
-                  </li>
-                  <li>
-                    <TagListItemName>
-                      {item.fields.email[0].value}
-                    </TagListItemName>
-                  </li>
-                </ul>
-              </ContactDetailsStyled>
-              <Topic>Tags</Topic>
-              <TagList>
-                {item.tags &&
-                  item.tags.map(({ id, tag }) => (
-                    <TagListItem key={id}>
-                      <TagListItemName>{tag}</TagListItemName>
-                    </TagListItem>
-                  ))}
-              </TagList>
-              <FormSection>
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                  <Input {...register("tags")} placeholder="Add new Tag" />
-                  <Button type="submit" disabled={isLoading}>
-                    {isLoading ? "Loading..." : "Add Tag"}
-                  </Button>
-                </Form>
-              </FormSection>
-            </ContactDetailsContainer>
-            <ToastContainer />
-          </section>
-        </>
+              <AvatarWrapper>
+                <UserAvatar src={item.avatar_url} width="54px" height="54px" />
+              </AvatarWrapper>
+              <ul>
+                <li>
+                  <TagListItemName>
+                    {item.fields && item.fields["first name"][0].value}
+                  </TagListItemName>
+                  <TagListItemName>
+                    {isLastNameExist && item.fields["last name"][0]?.value}
+                  </TagListItemName>
+                </li>
+                <li>
+                  <TagListItemName>
+                    {item.fields.email[0].value}
+                  </TagListItemName>
+                </li>
+              </ul>
+            </ContactDetailsStyled>
+            <Topic>Tags</Topic>
+            <TagList>
+              {item.tags &&
+                item.tags.map(({ id, tag }) => (
+                  <TagListItem key={id}>
+                    <TagListItemName>{tag}</TagListItemName>
+                  </TagListItem>
+                ))}
+            </TagList>
+            <FormSection>
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                <Input {...register("tags")} placeholder="Add new Tag" />
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? "Loading..." : "Add Tag"}
+                </Button>
+              </Form>
+            </FormSection>
+          </ContactDetailsContainer>
+          <ToastContainer />
+        </section>
       )}
       {isLoading && !isError && <Spinner />}
     </>

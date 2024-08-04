@@ -19,6 +19,7 @@ import { deleteContactById } from "../../redux/contacts/contacts-operations";
 import { toast } from "react-toastify";
 import userLogo from "/icons/user_icon.svg";
 import iconClose from "/icons/icon_close.svg";
+import { ContactsListStyled } from "../ContactsList/ContactsList.syled";
 
 export const ContactsListItem = () => {
   const contacts = useSelector(selectContacts);
@@ -31,7 +32,7 @@ export const ContactsListItem = () => {
   };
 
   return (
-    <>
+    <ContactsListStyled>
       {contacts && contacts.length !== 0 ? (
         contacts.map(({ id, avatar_url, fields, tags }) => (
           <ListItemWrapper key={id}>
@@ -48,17 +49,21 @@ export const ContactsListItem = () => {
                     {" "}
                     <ContactCredentials>
                       <ContactCredentialsSeparator>
-                        {fields["first name"] && fields["first name"][0].value}
+                        {fields &&
+                          fields["first name"] &&
+                          fields["first name"][0].value}
                       </ContactCredentialsSeparator>
                       <ContactCredentials>
                         {" "}
-                        {fields["last name"] && fields["last name"][0].value}
+                        {fields &&
+                          fields["last name"] &&
+                          fields["last name"][0].value}
                       </ContactCredentials>
                     </ContactCredentials>
                   </li>
                   <li>
                     <ContactCredentials>
-                      {fields.email && fields.email[0].value}
+                      {fields.email && fields.email[0] && fields.email[0].value}
                     </ContactCredentials>
                   </li>
 
@@ -82,6 +87,6 @@ export const ContactsListItem = () => {
       ) : (
         <div>Empty</div>
       )}
-    </>
+    </ContactsListStyled>
   );
 };
