@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <BrowserRouter basename="/contacts-test-task">
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </Provider>
