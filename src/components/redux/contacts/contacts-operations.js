@@ -13,7 +13,7 @@ const token = {
   },
 };
 
-const API_TOKEN = import.meta.env.VITE_API_TOKEN;
+const API_TOKEN = "VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn";
 
 export const getContactsList = createAsyncThunk(
   "contacts/getContactsList",
