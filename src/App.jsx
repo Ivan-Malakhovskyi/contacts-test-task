@@ -16,6 +16,15 @@ const App = () => {
         </Route>
       </Routes>
 
+      <button
+        type="button"
+        onClick={() => {
+          console.log("Click");
+        }}
+      >
+        Click
+      </button>
+
       <GlobalStyle />
     </>
   );
