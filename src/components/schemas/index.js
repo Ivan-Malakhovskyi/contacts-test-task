@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const nameRegex = /^[a-zA-Zа-яА-Я\s'-]*$/;
+const nameRegex = /^[a-zA-Zа-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s'-]*$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const createContactSchema = yup

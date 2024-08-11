@@ -46,6 +46,10 @@ export const ContactDetails = () => {
   const isLoading = useSelector(selectLoading);
   const isError = useSelector(selectError);
 
+  const contactInfo = useSelector(selectContactById);
+
+  const item = contactInfo && contactInfo[0];
+
   const { register, handleSubmit, reset } = useForm({ tags: [""] });
 
   const onSubmit = (data) => {
@@ -54,12 +58,30 @@ export const ContactDetails = () => {
       return;
     }
 
+    const isDuplicate =
+      item.tags.find((item) => item.tag.toLowerCase() === data.tags) ?? [];
+
+    if (isDuplicate.length !== 0) {
+      toast.error("Found duplicate tags");
+      return;
+    }
+
     const splitedTags = data.tags
       .split(",")
       .map((tag) => tag.trim())
       .filter((tag) => tag !== "");
 
-    const tags = { ...transformSimpleField("tags", splitedTags) };
+    const existTags = item.tags.length !== 0 && item.tags;
+
+    const newTags = splitedTags.map((tag) => ({ tag }));
+
+    const combinedTags = existTags
+      ? [...existTags, ...newTags].map(({ tag }) => tag)
+      : splitedTags;
+
+    const tags = {
+      ...transformSimpleField("tags", combinedTags),
+    };
 
     if (!isError && !isLoading) {
       dispatch(addTagToContact({ tags, id }));
@@ -67,10 +89,6 @@ export const ContactDetails = () => {
       reset();
     }
   };
-
-  const contactInfo = useSelector(selectContactById);
-
-  const item = contactInfo && contactInfo[0];
 
   const isLastNameExist =
     item && Object.keys(item.fields).includes("last name");
@@ -112,7 +130,7 @@ export const ContactDetails = () => {
               </ContactDetailsStyled>
               <Topic>Tags</Topic>
               <TagList>
-                {item.tags &&
+                {item.tags.length !== 0 &&
                   item.tags.map(({ id, tag }) => (
                     <TagListItem key={id}>
                       <TagListItemName>{tag}</TagListItemName>

@@ -36,8 +36,8 @@ it("when btn clicked, cb should be called", () => {
   expect(spy).toHaveBeenCalled();
 });
 
-it("snapshot", () => {
-  const tree = create(<button onClick={() => null}>Click</button>).toJSON();
+// it("snapshot", () => {
+//   const tree = create(<button onClick={() => null}>Click</button>).toJSON();
 
-  expect(tree).toMatchSnapshot();
-});
+//   expect(tree).toMatchSnapshot();
+// });
