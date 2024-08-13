@@ -7,6 +7,7 @@ export const theme = {
     accentBgColor: "#A6A6A6",
     addBgColor: "#EDEDED",
     MainColorInput: "#AAAAAA",
+    orange: "#ffae00",
   },
 };
 

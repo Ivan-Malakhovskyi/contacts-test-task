@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import {
@@ -21,6 +21,7 @@ import {
   TagList,
   TagListItem,
   ContactDetailsContainer,
+  BackLink,
 } from "../PhoneBook/ContactsListItem/ContactsListItem.styled";
 import {
   Button,
@@ -28,6 +29,8 @@ import {
   FormSection,
   Input,
 } from "../PhoneBook/ContactsForm/ContactsForm.styled";
+
+import arrow from "/public/icons/arrow_back.svg";
 
 import { transformSimpleField } from "../utils";
 
@@ -42,6 +45,10 @@ export const ContactDetails = () => {
   useEffect(() => {
     dispatch(getContactById(id));
   }, [dispatch, id]);
+
+  const location = useLocation();
+
+  const backLinkLocation = useRef(location.state?.from ?? "/");
 
   const isLoading = useSelector(selectLoading);
   const isError = useSelector(selectError);
@@ -90,6 +97,9 @@ export const ContactDetails = () => {
     }
   };
 
+  const isFirsNameExist =
+    item && Object.keys(item.fields).includes("first name");
+
   const isLastNameExist =
     item && Object.keys(item.fields).includes("last name");
 
@@ -102,7 +112,10 @@ export const ContactDetails = () => {
         contactInfo.length !== 0 && (
           <section>
             <ContactDetailsContainer>
-              {" "}
+              <BackLink icon={arrow} to={backLinkLocation.current}>
+                Back
+              </BackLink>
+
               <ContactDetailsStyled>
                 {" "}
                 <AvatarWrapper>
@@ -115,7 +128,7 @@ export const ContactDetails = () => {
                 <ul>
                   <li>
                     <TagListItemName>
-                      {item.fields && item.fields["first name"][0].value}
+                      {isFirsNameExist && item.fields["first name"][0].value}
                     </TagListItemName>
                     <TagListItemName>
                       {isLastNameExist && item.fields["last name"][0]?.value}
@@ -137,14 +150,13 @@ export const ContactDetails = () => {
                     </TagListItem>
                   ))}
               </TagList>
-              <FormSection>
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                  <Input {...register("tags")} placeholder="Add new Tag" />
-                  <Button type="submit" disabled={isLoading}>
-                    {isLoading ? "Loading..." : "Add Tag"}
-                  </Button>
-                </Form>
-              </FormSection>
+
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                <Input {...register("tags")} placeholder="Add new Tag" />
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? "Loading..." : "Add Tag"}
+                </Button>
+              </Form>
             </ContactDetailsContainer>
             <ToastContainer />
           </section>

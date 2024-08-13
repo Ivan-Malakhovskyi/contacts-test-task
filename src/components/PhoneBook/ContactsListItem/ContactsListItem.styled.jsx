@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
+import { Link } from "react-router-dom";
 
 export const ListItemWrapper = styled.li`
   position: relative;
@@ -37,10 +38,6 @@ export const ContactInfoWrapper = styled.div`
   display: flex;
   width: 100%;
   gap: 14px;
-
-  /* @media screen and (min-width: 1128px) {
-    max-width: 558px;
-  } */
 `;
 
 export const ContactCredentials = styled.span`
@@ -62,6 +59,7 @@ export const Topic = styled.h3`
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
+  margin-bottom: 17px;
 `;
 
 export const TagList = styled.ul`
@@ -72,7 +70,8 @@ export const TagList = styled.ul`
   flex-wrap: wrap;
 
   @media screen and (min-width: 768px) {
-    max-width: 426px;
+    max-width: 431px;
+    width: 100%;
   }
 `;
 
@@ -90,9 +89,8 @@ export const TagListItem = styled.li`
   background-color: ${({ theme: { colors } }) => colors.accentBgColor};
 
   @media screen and (max-width: 767px) {
-    width: 54px;
-    justify-content: center;
-    align-items: center;
+    max-width: 100%;
+    align-content: center;
   }
 `;
 
@@ -113,10 +111,42 @@ export const ContactDetailsStyled = styled.div`
 export const ContactDetailsContainer = styled.div`
   display: table;
   margin: 0 auto;
-  width: 431px;
-  max-width: 100%;
+  max-width: 431px;
+  width: 100%;
 `;
 
 export const AvatarWrapper = styled.div`
   margin-right: 15px;
 `;
+
+export const StyledLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  color: ${({ theme: { colors } }) => colors.MainBlack};
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    color: ${({ theme: { colors } }) => colors.orange};
+  }
+`;
+
+export const ArrowBack = styled(SVG)`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  fill: currentColor;
+`;
+
+export const BackLink = ({ to, children, icon }) => {
+  return (
+    <StyledLink to={to}>
+      <ArrowBack src={icon} />
+      {children}
+    </StyledLink>
+  );
+};
